@@ -1,0 +1,27 @@
+<h1>
+  Editing "<%= @page.name %>"
+</h1>
+
+<p class="actions">
+  <button onclick="$('form').submit()">Save</button> |
+  <%= link_to "Cancel", @page %> |
+  <%= link_to "Home", root_path %>
+</p>
+
+<%= render :partial => 'common/toolbar' %>
+
+<%= form_for @page do |f| %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :slug %>
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
+  <%= f.hidden_field :address %>
+  <%= f.text_area :content, :style => 'width: 100%; height: 300px' %>
+<% end %>
+
+<script>
+  var editor = new wysihtml5.Editor("page_content", {
+    toolbar:      "wysihtml5-toolbar", // id of toolbar element
+    parserRules:  wysihtml5ParserRules // defined in parser rules set 
+  });
+</script>

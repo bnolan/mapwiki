@@ -1,0 +1,28 @@
+<h1>
+  <%= @page.name %>
+</h1>
+
+<p class="actions">
+  <%= link_to "Edit Page", edit_page_url(@page) %> |
+  <%= link_to "Home", root_path %>
+</p>
+
+<% if @page.content.blank? %>
+  <p class="default-state">
+    This page doesn't exist yet. <%= link_to "Create", edit_page_url(@page) %> this page.
+  </p>
+<% else %>
+  <div class="content">
+    <%= @page.content.html_safe %>
+  </div>
+<% end %>
+
+<% if @page.inbound_links.any? %>
+  <h5>Pages that link here</h5>
+  
+  <ul>
+    <% @page.inbound_links.each do |page| %>
+      <li><%= link_to page.name, page %></li>
+    <% end %>
+  </ul>
+<% end %>
